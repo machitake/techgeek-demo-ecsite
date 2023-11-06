@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>フォーム</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="contact-form">
+    <h2>投稿フォーム</h2>
+    <form>
+      <div class="form-group">
+        <label for="name">
+          お名前</label>
+        <input type="text" id="name" name="name" placeholder="お名前" required>
+      </div>
+      <div class="form-group">
+        <label for="message">投稿内容</label>
+        <textarea id="message" name="message" placeholder="投稿内容" rows="4" required></textarea>
+      </div>
+      <button>送信</button>
+    </form>
+    <p id="show-name"></p>
+    <p id="show-message"></p>
+  </div>
+  <script>
+    // 送信ボタンを押すと、投稿内容が表示される
+    const form = document.querySelector('form button');
+    const showName = document.querySelector('#show-name');
+    const showMessage = document.querySelector('#show-message');
+
+    form.addEventListener('click', (e) => {
+      e.preventDefault();
+      const name = document.querySelector('#name').value;
+      const message = document.querySelector('#message').value;
+      showName.textContent = name;
+      showMessage.innerHTML = `${message}`;
+      alert("test");
+    });
+  </script>
+</body>
+
+</html>
