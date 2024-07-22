@@ -63,10 +63,21 @@
 
     //ウェブサイトの背景色（ダークモードとライトモード）を切り替える
     const themeToggle = document.getElementById('theme-toggle');
+    
+    const themeMode = localStorage.getItem('themeMode');
+    if (themeMode === 'dark') {
+      document.body.classList.add('dark-theme');
+      themeToggle.textContent = 'ライトモードにする';
+    } else {
+      document.body.classList.remove('dark-theme');
+      themeToggle.textContent = 'ダークモードにする';
+    }
+    
     themeToggle.addEventListener('click', (e) => {
       document.body.classList.toggle('dark-theme');
       console.log(e.target.textContent);
       e.target.textContent = e.target.textContent === 'ダークモードにする' ? 'ライトモードにする' : 'ダークモードにする';
+      localStorage.setItem('themeMode', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
     });
   </script>
 </body>
