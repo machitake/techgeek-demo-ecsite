@@ -11,6 +11,7 @@
 
 <body>
   <main>
+
     <div class="container">
       <ul>
         <li>
@@ -19,9 +20,47 @@
         <li>
           <a href="./cart.html">カート</a>
         </li>
+        <li>
+          <h2>ユーザー入力フォーム</h2>
+          <form>
+            <div class="form-item">
+              <label for="name">名前</label>
+              <input type="text" id="name" name="name" placeholder="名前">
+            </div>
+            <div class="form-item">
+              <label for="email">メールアドレス</label>
+              <input type="text" id="email" name="email" placeholder="メールアドレス">
+            </div>
+            <button class="btn" type="submit">保存</button>
+          </form>
+        </li>
       </ul>
     </div>
   </main>
+
+  <script>
+    //変数の定義
+    const userName = document.getElementById('name');
+    const userEmail = document.getElementById('email');
+    //ページリロード時セッションストレージの値をinputに入れる
+    userName.value = sessionStorage.getItem('userName');
+    userEmail.value = sessionStorage.getItem('userEmail');
+
+    //フォームの送信イベントをトリガーしたときに実行される関数
+    const form = document.querySelector('form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      console.log('送信されました');
+      const name = userName.value;
+      const email = userEmail.value;
+      sessionStorage.setItem('userName', name);
+      sessionStorage.setItem('userEmail', email);
+      console.log('名前:', sessionStorage.getItem('userName'));
+      console.log('メールアドレス:', sessionStorage.getItem('userEmail'));
+    });
+
+
+  </script>
 </body>
 
 </html>
