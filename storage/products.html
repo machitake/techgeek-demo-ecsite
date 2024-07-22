@@ -64,7 +64,11 @@
         const selectedProducts = JSON.parse(localStorage.getItem('selectedProducts'));
         const newSelectedProducts = selectedProducts ? [...selectedProducts, productData] : [productData];
         console.log({ newSelectedProducts });
+        
+        //localStorageに値を保存
         localStorage.setItem('selectedProducts', JSON.stringify(newSelectedProducts));
+        //sessionStorageに値を保存
+        sessionStorage.setItem('selectedProducts', JSON.stringify(newSelectedProducts));
         // location.href = './cart.html';
       });
     });
