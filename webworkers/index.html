@@ -18,6 +18,16 @@
       <button id="calc">計算</button>
       <p id="result"></p>
     </div>
+    <div class="container">
+      <h2>課題 Web Workersによる並行処理</h2>
+      <p>createRandomArray</p>
+      <input type="number" id="randomArrayNumber" min="1" max="10000" value="1">
+      <button id="calcRandomArray">配列の生成</button>
+      <p id="resultRandomArray"></p>
+      <p>バブルソートアルゴリズム</p>
+      <button id="calcBubbleSort">ソート</button>
+      <p id="resultBubbleSort"></p>
+    </div>
   </main>
   <script>
     const number = document.getElementById('number');
@@ -34,6 +44,34 @@
       });
     });
 
+
+    // 課題 Web Workersによる並行処理
+    const randomArrayNumber = document.getElementById('randomArrayNumber');
+    const calcRandomArray = document.getElementById('calcRandomArray');
+    const resultRandomArray = document.getElementById('resultRandomArray');
+
+    calcRandomArray.addEventListener('click', () => {
+      const n = randomArrayNumber.value;
+      const worker = new Worker('./worker-randomArray.js');
+      worker.postMessage(n);
+      worker.addEventListener('message', (event) => {
+        resultRandomArray.textContent = event.data;
+      });
+    });
+
+    const calcBubbleSort = document.getElementById('calcBubbleSort');
+    const resultBubbleSort = document.getElementById('resultBubbleSort');
+
+    calcBubbleSort.addEventListener('click', () => {
+      const arrayString = resultRandomArray.textContent;
+      const array = arrayString.split(',').map(Number);
+      console.log(typeof array);
+      const worker = new Worker('./worker-bubbleSort.js');
+      worker.postMessage(array);
+      worker.addEventListener('message', (event) => {
+        resultBubbleSort.textContent = event.data;
+      });
+    });
   </script>
 </body>
 
